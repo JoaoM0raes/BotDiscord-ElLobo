@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BotDiscord.CommandsModules
+namespace BotDiscord.CommandsModules.LolCommands
 {
-    public class UtilityModel : ModuleBase<SocketCommandContext>
+    public class LolCommands : ModuleBase<SocketCommandContext>
     {
         [Command("say")]
         public async Task SayAsyc()
         {
-            await ReplyAsync("vasco");
+
         }
-            
+
     }
 }

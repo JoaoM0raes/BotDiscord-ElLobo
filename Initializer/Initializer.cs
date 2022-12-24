@@ -17,21 +17,26 @@ namespace BotDiscord.Initializers
     {
         public static ServiceProvider InitializerService()
         {
-            IServiceCollection service = new ServiceCollection();
 
-            service.AddSingleton<ILogger, Logger>();
-            service.AddSingleton(new DiscordSocketClient(new DiscordSocketConfig
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<FileConfig>();
+            services.AddHttpClient("RiotApi");
+            
+            services.AddSingleton<ILogger, Logger>();
+            services.AddSingleton(new DiscordSocketClient(new DiscordSocketConfig
             {
                 MessageCacheSize = 500,
                 LogLevel = LogSeverity.Info,
                 GatewayIntents=GatewayIntents.All
                 
             }));
-            service.AddSingleton<CommandService>();
-            service.AddSingleton<ICommandHandler, CommandHandler>();
-            service.AddSingleton<FileConfig>();
+            
+            services.AddSingleton<CommandService>();
+            services.AddSingleton<ICommandHandler, CommandHandler>();
+            
 
-            return service.BuildServiceProvider();
+            return services.BuildServiceProvider();
 
         }
     }

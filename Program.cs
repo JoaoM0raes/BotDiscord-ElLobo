@@ -22,10 +22,8 @@ namespace BotDiscord
             ConstructObejects();
 
             await _client.LoginAsync(TokenType.Bot, _config.Token);
+
             await _client.StartAsync();
-
-         
-
 
             await Task.Delay(-1);
         }

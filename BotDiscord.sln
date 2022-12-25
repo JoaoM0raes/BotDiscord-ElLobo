@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotDiscord", "BotDiscord.cs
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DiscordBot", "DiscordBot", "{4DCA5913-E86A-4F39-A7BF-819BE9A6A07F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRiotApi", "..\TestRiotApi\TestRiotApi.csproj", "{2D319CE0-74DE-4A1E-BF6E-ADC8A66D35FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{A9E179A9-D04F-4C9C-AC33-B19DBFEAD7B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9E179A9-D04F-4C9C-AC33-B19DBFEAD7B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9E179A9-D04F-4C9C-AC33-B19DBFEAD7B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D319CE0-74DE-4A1E-BF6E-ADC8A66D35FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D319CE0-74DE-4A1E-BF6E-ADC8A66D35FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D319CE0-74DE-4A1E-BF6E-ADC8A66D35FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D319CE0-74DE-4A1E-BF6E-ADC8A66D35FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

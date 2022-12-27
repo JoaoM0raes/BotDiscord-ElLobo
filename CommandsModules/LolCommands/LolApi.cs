@@ -26,18 +26,26 @@ namespace BotDiscord.CommandsModules.LolCommands
         {
             var result = _httpClient.GetAsync($"//br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{SummonnerName}").Result;
 
-            var content = result.Content.ReadAsStringAsync().Result;
-
             result.EnsureSuccessStatusCode();
+
+            var content = result.Content.ReadAsStringAsync().Result;
 
             LolPlayerModel json = JsonConvert.DeserializeObject<LolPlayerModel>(content);
 
             return json;
         }
 
-        public LolPlayerStats GetPlayerRanks(LolPlayerModel player)
+        public LolPlayerModel GetPlayerRanks(LolPlayerModel player)
         {
+            var result = _httpClient.GetAsync($"https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/{player.id}").Result;
 
+            result.EnsureSuccessStatusCode();
+
+            var content = result.Content.ReadAsStringAsync().Result;            
+
+            player.stats = JsonConvert.DeserializeObject<LolPlayerStats[]>(content);
+
+            return player; 
         }
     }
 }

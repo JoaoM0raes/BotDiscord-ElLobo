@@ -9,10 +9,30 @@ namespace BotDiscord.CommandsModules.LolCommands
 {
     public class LolCommands : ModuleBase<SocketCommandContext>
     {
-        [Command("say")]
-        public async Task SayAsyc()
-        {
+        private LolApi _lolApi; 
 
+        public LolCommands(LolApi lolApi)
+        {
+            _lolApi = lolApi;
+        }
+
+        [Command("jogador")]
+        public async Task GetJogadorAsync(string playerName)
+        {
+            try
+            {
+              var player = _lolApi.GetPlayerId(playerName);
+
+              player.stats = _lolApi.GetPlayerRanks(player);
+
+              
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
         }
 
     }

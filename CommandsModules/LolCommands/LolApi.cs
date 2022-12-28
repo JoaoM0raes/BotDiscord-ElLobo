@@ -35,17 +35,17 @@ namespace BotDiscord.CommandsModules.LolCommands
             return json;
         }
 
-        public LolPlayerModel GetPlayerRanks(LolPlayerModel player)
+        public LolPlayerStats[] GetPlayerRanks(LolPlayerModel player)
         {
             var result = _httpClient.GetAsync($"https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/{player.id}").Result;
 
             result.EnsureSuccessStatusCode();
 
-            var content = result.Content.ReadAsStringAsync().Result;            
+            var content = result.Content.ReadAsStringAsync().Result;
 
-            player.stats = JsonConvert.DeserializeObject<LolPlayerStats[]>(content);
+            LolPlayerStats[] stats = JsonConvert.DeserializeObject<LolPlayerStats[]>(content);
 
-            return player; 
+            return stats; 
         }
     }
 }

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotDiscord", "BotDiscord.cs
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DiscordBot", "DiscordBot", "{4DCA5913-E86A-4F39-A7BF-819BE9A6A07F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRiotApi", "..\TestRiotApi\TestRiotApi.csproj", "{2D319CE0-74DE-4A1E-BF6E-ADC8A66D35FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestRiotApi", "..\TestRiotApi\TestRiotApi.csproj", "{2D319CE0-74DE-4A1E-BF6E-ADC8A66D35FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

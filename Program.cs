@@ -1,5 +1,5 @@
-﻿using BotDiscord.Fileconfig;
-using BotDiscord.Initializers;
+﻿using BotDiscord.Infra.FileConfig;
+using BotDiscord.Infra.Initializer;
 using Discord;
 using Discord.WebSocket;
 using Domain.CommandHandlerModule;

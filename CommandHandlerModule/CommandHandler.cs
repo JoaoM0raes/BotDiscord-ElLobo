@@ -1,6 +1,6 @@
-﻿using Discord.Commands;
+﻿using BotDiscord.Infra.LogModule;
+using Discord.Commands;
 using Discord.WebSocket;
-using Infra.LodModule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +13,9 @@ namespace Domain.CommandHandlerModule
     public class CommandHandler : ICommandHandler
     {
         private DiscordSocketClient _client { get; set; }
-        private ILogger _log { get; set; }
+        private ILog _log { get; set; }
         private CommandService _service { get; set; }
-        public CommandHandler(ILogger log, DiscordSocketClient cliente, CommandService service)
+        public CommandHandler(ILog log, DiscordSocketClient cliente, CommandService service)
         {
             _client = cliente;
             _log = log;

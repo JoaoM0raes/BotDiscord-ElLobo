@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BotDiscord.Initializers
+namespace BotDiscord.Infra.Initializer
 {
     public class Initializer
     {
@@ -22,19 +22,19 @@ namespace BotDiscord.Initializers
 
             services.AddSingleton<FileConfig>();
             services.AddHttpClient("RiotApi");
-            
+
             services.AddSingleton<ILogger, Logger>();
             services.AddSingleton(new DiscordSocketClient(new DiscordSocketConfig
             {
                 MessageCacheSize = 500,
                 LogLevel = LogSeverity.Info,
-                GatewayIntents=GatewayIntents.All
-                
+                GatewayIntents = GatewayIntents.All
+
             }));
-            
+
             services.AddSingleton<CommandService>();
             services.AddSingleton<ICommandHandler, CommandHandler>();
-            
+
 
             return services.BuildServiceProvider();
 

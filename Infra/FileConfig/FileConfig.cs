@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BotDiscord.Infra.FileConfig
+namespace BotDiscord.Infra.FileConfigs
 {
     public class FileConfig
     {

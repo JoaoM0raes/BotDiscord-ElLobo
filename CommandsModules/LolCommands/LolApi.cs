@@ -19,12 +19,12 @@ namespace BotDiscord.CommandsModules.LolCommands
         {
             _httpClientFactory = httpClientFactory;
             _httpClient = _httpClientFactory.CreateClient("RiotApi");
-            _httpClient.DefaultRequestHeaders.Add("X-Riot-Token", "RGAPI-d4a99e72-e1fd-41dd-a030-8359bfae0f3c");
+            _httpClient.DefaultRequestHeaders.Add("X-Riot-Token", "RGAPI-e656b987-9b06-441a-9dbf-42d0d15530b7");
         }
 
-        public LolPlayerModel GetPlayerId(string SummonnerName)
+        public async Task <LolPlayerModel> GetPlayerId(string SummonnerName)
         {
-            var result = _httpClient.GetAsync($"//br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{SummonnerName}").Result;
+            var result = _httpClient.GetAsync($"https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{SummonnerName}").Result;
 
             result.EnsureSuccessStatusCode();
 
@@ -35,7 +35,7 @@ namespace BotDiscord.CommandsModules.LolCommands
             return json;
         }
 
-        public LolPlayerStats[] GetPlayerRanks(LolPlayerModel player)
+        public async Task<LolPlayerStats[]> GetPlayerRanks(LolPlayerModel player)
         {
             var result = _httpClient.GetAsync($"https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/{player.id}").Result;
 

@@ -9,7 +9,7 @@ namespace Domain.CommandHandlerModule
 {
     public interface ICommandHandler
     {
-        public Task HandleCommandAsync(SocketMessage messageParam);
-        public Task InitializeAsync();
+        public Task HandleMessageAsync(SocketMessage messageParam);
+        
     }
 }

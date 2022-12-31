@@ -1,4 +1,5 @@
-﻿using Discord.Commands;
+﻿using Discord;
+using Discord.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BotDiscord.CommandsModules.LolCommands
 {
-    public class LolCommands : ModuleBase<SocketCommandContext>
+    public class LolCommands : ModuleBase
     {
         private LolApi _lolApi; 
 
@@ -18,21 +19,23 @@ namespace BotDiscord.CommandsModules.LolCommands
 
         [Command("jogador")]
         public async Task GetJogadorAsync(string playerName)
-        {
-            try
+        {            
+           var player =  await _lolApi.GetPlayerId(playerName);
+
+           player.stats = await _lolApi.GetPlayerRanks(player);
+
+
+           foreach (var item in player.stats)
             {
-              var player = _lolApi.GetPlayerId(playerName);
+                var embed = new EmbedBuilder()
+                  .WithTitle($"{playerName}")
+                  .AddField($"{item.queueType}", $" {item.tier},{item.elo}", true)
+                  .WithThumbnailUrl($"https://ddragon.leagueoflegends.com/cdn/12.23.1/img/profileicon/{player.icon}.png")
+                  .Build();
 
-              player.stats = _lolApi.GetPlayerRanks(player);
-
-              
-
+                await ReplyAsync("", false, embed);
             }
-            catch (Exception ex)
-            {
-
-
-            }
+            
         }
 
     }

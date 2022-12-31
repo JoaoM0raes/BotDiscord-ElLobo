@@ -19,7 +19,6 @@ namespace BotDiscord.Infra.LogModule
             command.Log += LogAsync;
         }
 
-
         public Task LogAsync(LogMessage message) //using discord log for consoles logs
         {
             Console.WriteLine(message);

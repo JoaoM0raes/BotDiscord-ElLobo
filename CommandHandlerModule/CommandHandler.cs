@@ -1,12 +1,15 @@
-﻿using BotDiscord.Infra.LogModule;
+﻿using BotDiscord.Infra.Initializer;
+using BotDiscord.Infra.LogModule;
 using Discord.Commands;
 using Discord.WebSocket;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Domain.CommandHandlerModule
 {
@@ -14,17 +17,27 @@ namespace Domain.CommandHandlerModule
     {
         private DiscordSocketClient _client { get; set; }
         private ILog _log { get; set; }
-        private CommandService _service { get; set; }
-        public CommandHandler(ILog log, DiscordSocketClient cliente, CommandService service)
-        {
+        private CommandService _command{ get; set; }
+
+        private IServiceProvider _services { get; set; }
+        public CommandHandler(DiscordSocketClient cliente,IServiceProvider services)
+        {            
             _client = cliente;
-            _log = log;
-            _service = service;
-            InitializeAsync();
-            _client.MessageReceived += HandleCommandAsync;
+            
+            _command = services.GetRequiredService<CommandService>();
+            
+            _log = services.GetRequiredService<ILog>();
+
+            _services = services;
+
+            Initialize();
+
+            _client.MessageReceived += HandleMessageAsync;
+
+            
         }
 
-        public async Task HandleCommandAsync(SocketMessage messageParam)
+        public async Task HandleMessageAsync(SocketMessage messageParam)
         {
             var message = messageParam as SocketUserMessage;
 
@@ -38,7 +51,7 @@ namespace Domain.CommandHandlerModule
             if (messageParam.Author.IsBot || !message.HasCharPrefix('!', ref argPos))
                 return;
 
-            var result = await _service.ExecuteAsync(context, argPos, services: null);
+            var result = await _command.ExecuteAsync(context, argPos, _services);
 
             await HandleError(result, context);
 
@@ -53,7 +66,12 @@ namespace Domain.CommandHandlerModule
             }
             return;
         }
-        public async Task InitializeAsync()
-            => await _service.AddModulesAsync(Assembly.GetEntryAssembly(), null);
+
+        public async Task Initialize()
+        {
+            await _command.AddModulesAsync(assembly: Assembly.GetEntryAssembly(),
+                                    _services);
+        }
+
     }
 }

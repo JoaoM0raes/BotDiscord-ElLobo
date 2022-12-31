@@ -18,6 +18,9 @@ namespace BotDiscord.Models.lolModels
         [JsonProperty("tier")]
         public string tier { get; set; }
 
+        [JsonProperty("queueType")]
+        public string queueType { get; set; }
+
         public List<MatchesModel> matches { get; set; }
     }
 }

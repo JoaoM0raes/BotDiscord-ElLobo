@@ -1,4 +1,5 @@
-﻿using BotDiscord.Infra.FileConfig;
+﻿
+using BotDiscord.Infra.FileConfigs;
 using BotDiscord.Infra.Initializer;
 using Discord;
 using Discord.WebSocket;
@@ -19,21 +20,24 @@ namespace BotDiscord
         }
         public async Task MainTask()
         {
-            ConstructObejects();
+            var services =ConstructObejects();
 
             await _client.LoginAsync(TokenType.Bot, _config.Token);
 
             await _client.StartAsync();
 
+            services.GetRequiredService<ICommandHandler>();
+            
             await Task.Delay(-1);
         }
-        private void ConstructObejects()
+        private IServiceProvider ConstructObejects()
         {
             var services = Initializer.InitializerService();
 
             _client = services.GetRequiredService<DiscordSocketClient>();
             _config = services.GetRequiredService<FileConfig>();
-            _commandHandler = services.GetRequiredService<ICommandHandler>();
+            
+            return services;
         }
     }
 }

@@ -1,9 +1,11 @@
-﻿using BotDiscord.Fileconfig;
+﻿
+using BotDiscord.CommandsModules.LolCommands;
+using BotDiscord.Infra.FileConfigs;
+using BotDiscord.Infra.LogModule;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Domain.CommandHandlerModule;
-using Infra.LodModule;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -20,10 +22,11 @@ namespace BotDiscord.Infra.Initializer
 
             IServiceCollection services = new ServiceCollection();
 
-            services.AddSingleton<FileConfig>();
-            services.AddHttpClient("RiotApi");
+            services.AddSingleton<LolApi>();
+            services.AddSingleton<FileConfig>();                  
+            services.AddHttpClient("RiotApi");                     
 
-            services.AddSingleton<ILogger, Logger>();
+            services.AddSingleton<ILog, Log>();
             services.AddSingleton(new DiscordSocketClient(new DiscordSocketConfig
             {
                 MessageCacheSize = 500,
@@ -33,8 +36,8 @@ namespace BotDiscord.Infra.Initializer
             }));
 
             services.AddSingleton<CommandService>();
+            
             services.AddSingleton<ICommandHandler, CommandHandler>();
-
 
             return services.BuildServiceProvider();
 
